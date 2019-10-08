@@ -1,8 +1,8 @@
 <template>
   
   <div>
-    <headers tittle="我的喵喵"/>
-<icon></icon>
+    <headers tittle="喵喵影院"/>
+  <icon />
   </div>
 </template>
 
@@ -11,8 +11,8 @@ import icon from "@/components/lists"
 import headers from "@/components/header"
 export default {
 components:{
-    icon,
-    headers
+  icon,
+  headers
 }
 }
 </script>

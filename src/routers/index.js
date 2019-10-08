@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import cinema from './cinema'
 import mine from './mine'
-import local from './local'
+import movie from './movie'
 
 Vue.use(Router)
 
@@ -12,10 +12,10 @@ export default new Router({
   routes: [
       cinema,
       mine,
-      local,
+      movie,
       {
         path:'/*',
-        redirect:()=> cinema
+        redirect:"/cinema/nowplaying"
       }
   ]
 })
