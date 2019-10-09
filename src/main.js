@@ -6,7 +6,9 @@ import axios from "axios"
 
 Vue.prototype.axios=axios
 Vue.config.productionTip = false
-
+Vue.filter('setWt',(url,news)=>{
+return url.replace('/w\.h/',news)
+})
 
 new Vue({
   router,
