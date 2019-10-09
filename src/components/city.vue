@@ -4,14 +4,14 @@
       <div class="city_hot">
         <h2>热门城市</h2>
         <ul>
-          <li v-for="item in hotcity" :key="item.id">{{item.nm}}</li>
+          <li @click='handlechange(item.nm,item.id)' v-for="item in hotcity" :key="item.id">{{item.nm}}</li>
         </ul>
       </div>
       <div class="city_sort">
         <div v-for="itemss in allcitys" :key="itemss.index">
           <h2>{{itemss.index}}</h2>
           <ul>
-            <li v-for="itemes in itemss.list" :key="itemes.id">{{itemes.nm}}</li>
+            <li @tap='handlechange(itemes.nm,itemes.id)' v-for="itemes in itemss.list" :key="itemes.id">{{itemes.nm}}</li>
           </ul>
         </div>
       </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -35,6 +36,7 @@ export default {
     };
   },
   mounted() {
+
     let hotcityss = window.localStorage.getItem("hotcityss");
     let cities = window.localStorage.getItem("cities");
     if (hotcityss && cities) {
@@ -107,7 +109,14 @@ export default {
 
       this.allcitys = allcitys;
       console.log(this.allcitys);
+    },
+    handlechange(nm,id){
+      this.$store.commit('city/CON_CITY',{nm:nm,id:id})
+      window.localStorage.setItem('citynm',nm)
+      window.localStorage.setItem('cityid',id)
+       this.$router.push('/movie/nowplaying');
     }
+
   }
 };
 </script>

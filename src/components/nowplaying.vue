@@ -26,14 +26,20 @@ export default {
 
 data(){
 return{
-movielist:[]
+movielist:[],
+ids:-1
 }
 },
 mounted(){
-    this.axios.get('/api/movieOnInfoList?cityId=10').then(res=>{
+  let preid = this.$store.state.city.cityid
+  if(this.ids==preid){
+    return
+  }
+    this.axios.get('/api/movieOnInfoList?cityId='+preid).then(res=>{
 console.log(res)
 if(res.data.msg==='ok'){
 this.movielist = res.data.data.movieList
+this.ids = preid
 console.log(this.movielist,11111)
 }
 })

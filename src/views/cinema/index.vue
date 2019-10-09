@@ -2,7 +2,7 @@
   <div id="content">
     <headers tittle="喵喵电影"/>
 <ul class="movie_menu">
-      <router-link tag ="li" to="/cinema/city" class="city_name">北京<span class="iconfont icon-lower-triangle"></span></router-link>
+      <router-link tag ="li" to="/cinema/city" class="city_name">{{this.$store.state.city.cityname}}<span class="iconfont icon-lower-triangle"></span></router-link>
       <div class="hot_swtich">
     <router-link tag ="li" to="/cinema/nowplaying" class="hot_item">正在热映</router-link>
     <router-link tag ="li" to="/cinema/comingsoon" class="hot_item">即将上映</router-link>
@@ -21,12 +21,50 @@
 <script>
 import icon from "@/components/lists"
 import headers from "@/components/header"
+import {checkboxs }from "@/components/js"
 export default {
-  name:"cinema",
 
+  name:"cinema",
+data(){
+  return{
+    citynames:window.localStorage.getItem('citynm')
+}},
 components:{
   icon,
   headers
+},
+mounted(){
+  let that = this
+      setTimeout(fn(that),3000)
+    function fn (that){
+
+  that.axios.get("/api/getLocation").then((res)=>{
+    let name = res.data.data.nm
+    let id = res.data.data.id
+    console.log(that.$store.state.city.cityid,1111111111111)
+    if(id==that.$store.state.city.cityid){
+return
+    }
+      checkboxs({
+        title:'当前所处位置',
+city:name,
+issure:'取消',
+iscancel:'确认切换',
+handlecancle:()=>{console.log('sasas')},
+handleok:()=>{
+  window.localStorage.setItem('citynm',name)
+  window.localStorage.setItem('cityid',id)
+   window.location.reload();
+}
+      })
+  }).catch((err)=>{
+    console.log("获取数据失败")
+  })
+
+
+    }
+
+
 }
 }
 </script>

@@ -17,11 +17,11 @@ export default {
         }
     },
 methods:{
-    search:function searchs(){
-this.axios.get("/api/searchList?cityId=10&kw="+this.valuess).then((res)=>{
-console.log(res)
-})
-    }
+//     search:function searchs(){
+// this.axios.get("/api/searchList?cityId=10&kw="+this.valuess).then((res)=>{
+// console.log(res)
+// })
+//     }
     
 }
 }
