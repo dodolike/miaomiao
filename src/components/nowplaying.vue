@@ -1,5 +1,8 @@
 <template>
-  <div class="movie_body">
+<div class="movie_body">
+  <load v-if="isshow" />
+  <scroll v-else>
+ 
 <ul>
     <li v-for="item in movielist" :key="item.id">
         <div class="pic_show">
@@ -18,7 +21,11 @@
 <div class="btn_mall">购票</div>
     </li>
 </ul>
-  </div>
+
+  </scroll>
+</div>
+
+
 </template>
 
 <script>
@@ -27,17 +34,21 @@ export default {
 data(){
 return{
 movielist:[],
-ids:-1
+ids:-1,
+isshow:true
 }
 },
 mounted(){
+  this.isshow=true;
   let preid = this.$store.state.city.cityid
   if(this.ids==preid){
+    this.isshow=false
     return
   }
     this.axios.get('/api/movieOnInfoList?cityId='+preid).then(res=>{
 console.log(res)
 if(res.data.msg==='ok'){
+  this.isshow = false
 this.movielist = res.data.data.movieList
 this.ids = preid
 console.log(this.movielist,11111)

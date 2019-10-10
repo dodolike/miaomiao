@@ -1,8 +1,8 @@
 <template>
   <div>
     <div id="footer">
-      <ul>
-        <router-link tag="li" to="/cinema">
+      <ul class="clearfix">
+        <router-link tag="li" to="/cinema/nowplaying">
           <i class="iconfont icon-dianying"></i>
           <p>电影</p>
         </router-link>
@@ -34,6 +34,7 @@ export default {};
   position: fixed;
   left: 0;
   bottom: 0;
+
 }
 #footer ul {
   display: flex;

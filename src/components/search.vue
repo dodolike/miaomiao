@@ -2,27 +2,65 @@
   <div class="search_body">
      <div class="search_input_wrapper">
          <i class="iconfont icon-sousuo"></i>
-      <input type="text" class="search_inpu" @input="search" v-model="valuess">
+      <input type="text" class="search_inpu"  v-model="valuess">
+     </div>
+     <div class="search_result" >
+
+         <h3>电影电视剧综艺</h3>
+         <ul>
+             <li v-for="item in list" :key="item.id">
+                 <div class="img"><img :src="item.img|setWt(/128.180/)" alt=""></div>
+                 <div class="info">
+<p>{{item.nm}}</p>
+<p>{{item.enm}}</p>
+<p>{{item.star}}</p>
+<p>{{item.pubDesc}}</p>
+                 </div>
+             </li>
+         </ul>
      </div>
       
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import vue from 'vue'
 export default {
     data(){
         return{
-            valuess:''
+            valuess:'',
+            list:[]
         }
     },
 methods:{
-//     search:function searchs(){
-// this.axios.get("/api/searchList?cityId=10&kw="+this.valuess).then((res)=>{
-// console.log(res)
-// })
-//     }
-    
+requests(){
+            var CancelToken = this.axios.CancelToken
+            var source = CancelToken.source()
+              var that = this
+            // 取消上一次请求
+           cancelRequest();
+            
+            this.axios.get(('/api/searchList?cityId='+this.$store.state.city.cityid+'&kw='+this.valuess), {
+                cancelToken: new axios.CancelToken(function executor(c) {
+                 that.source = c;
+                })
+            }).then((res) =>{
+                // 在这里处理得到的数据
+                console.log(res.data.data.movies.list)
+                this.list = res.data.data.movies.list
+            })
+
+       function  cancelRequest(){
+            if(typeof that.source ==='function'){
+                that.source('终止请求')
+            }
+        }
+}},
+watch:{
+    valuess(){
+        this.requests()
+    }
 }
 }
 </script>

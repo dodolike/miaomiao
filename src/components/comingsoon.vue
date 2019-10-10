@@ -1,5 +1,7 @@
 <template>
  <div class="movie_body">
+     <load  v-if="isloading"/>
+     <scroll v-else>
      <ul>
          <li v-for="item in cominglist" :key="item.id">
               <div class="pic_show">
@@ -15,7 +17,7 @@
      <div class="btn_pre">预购</div>
          </li>
      </ul>
-    
+    </scroll>
  </div>
 </template>
 
@@ -23,13 +25,16 @@
 export default {
     data(){
         return{
+            isloading:true,
             cominglist:[]
         }
     },
 mounted(){
+    this.isloading=true;
     this.axios.get("/api/movieComingList?cityId=10").then((res)=>{
 
 if(res.data.msg=='ok'){
+    this.isloading = false
     this.cominglist = res.data.data.comingList
     console.log(this.cominglist)
 }
@@ -38,8 +43,8 @@ if(res.data.msg=='ok'){
 }
 </script>
 
-<style>
-#content .movie_body{ flex:1; overflow:auto;}
+<style scoped>
+#content .movie_body{ flex:1; overflow:auto}
 .movie_body ul{ margin:0 12px; overflow: hidden;}
 .movie_body ul li{ margin-top:12px; display: flex; align-items:center; border-bottom: 1px #e6e6e6 solid; padding-bottom: 10px;}
 .movie_body .pic_show{ width:64px; height: 90px;}

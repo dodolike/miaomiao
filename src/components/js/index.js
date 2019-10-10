@@ -26,14 +26,16 @@ export var checkboxs = function(data){
             methods:{
         handlecancel(){
         defaults.handlecancle&&defaults.handlecancle.call(this)
-        document.removeChild(conss.$el)
+        document.body.removeChild(conss.$el)
         },
         handleok(){
             defaults.handleok&&defaults.handleok.call(this)
-            document.documentElement.removeChild(conss.$el)
+            document.body.removeChild(conss.$el)
+          
         }
             }
         })
-        document.documentElement.appendChild(conss.$el)
+        document.body.appendChild(conss.$el)
+        console.log('用到了')
         }
 

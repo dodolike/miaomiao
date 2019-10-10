@@ -1,5 +1,5 @@
 <template>
-<div id="content">
+<div>
  <div class="container">
       <h2>{{title}}</h2>
       <p>{{city}}</p>
@@ -20,6 +20,7 @@ name:'checkbox'
 
 <style scoped lang="scss">
 .container{ 
+   
     position: absolute;
     left: 50%;
     top: 50%;

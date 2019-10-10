@@ -1,9 +1,11 @@
 <template>
-  
-  <div>
+  <div id="main">
     <headers tittle="我的喵喵"/>
-
+  <div id="content">
+    
+</div>
 <icon></icon>
+
   </div>
 </template>
 

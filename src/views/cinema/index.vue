@@ -1,4 +1,5 @@
 <template>
+<div id="main">
   <div id="content">
     <headers tittle="喵喵电影"/>
 <ul class="movie_menu">
@@ -15,6 +16,7 @@
 
 <router-view></router-view>
 <icon></icon>
+  </div>
   </div>
 </template>
 
@@ -37,14 +39,17 @@ mounted(){
   let that = this
       setTimeout(fn(that),3000)
     function fn (that){
-
+console.log('1212121212,asasas')
   that.axios.get("/api/getLocation").then((res)=>{
     let name = res.data.data.nm
     let id = res.data.data.id
-    console.log(that.$store.state.city.cityid,1111111111111)
-    if(id==that.$store.state.city.cityid){
+    let ids = that.$store.state.city.cityid
+    console.log(id)
+    console.log(ids)
+    if(id==ids){
 return
-    }
+    };
+    console.log("??")
       checkboxs({
         title:'当前所处位置',
 city:name,
@@ -70,7 +75,8 @@ handleok:()=>{
 </script>
 
 <style lang="scss" scoped>
-#content{ flex:1; overflow:auto; margin-bottom: 50px; position: relative; display: flex; flex-direction:column;}
+
+#content{ flex:1;overflow:hidden; margin-bottom: 50px; position: relative; display: flex; flex-direction:column;}
 #content .movie_menu{ width: 100%; height: 45px; border-bottom:1px solid #e6e6e6; display: flex; justify-content:space-between; align-items:center; background:white; z-index:10;}
 .movie_menu .city_name{ margin-left: 20px; height:100%; line-height: 45px;}
 .movie_menu .city_name.router-link-active{ color: #ef4238; border-bottom: 2px #ef4238 solid;}
@@ -80,4 +86,5 @@ handleok:()=>{
 .movie_menu .search_entry{ margin-right:20px; height:100%; line-height: 45px;}
 .movie_menu .search_entry.router-link-active{ color: #ef4238; border-bottom: 2px #ef4238 solid;}
 .movie_menu .search_entry i{  font-size:24px; color:red;}
+
 </style>
