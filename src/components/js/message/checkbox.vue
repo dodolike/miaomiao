@@ -4,8 +4,8 @@
       <h2>{{title}}</h2>
       <p>{{city}}</p>
       <div class="fenge">
-          <div @touchstart="handleok">{{issure}}</div>
-          <div  @touchstart="handlecancel">{{iscancel}}</div>
+          <div @touchstart="handleok" v-show="issure">{{issure}}</div>
+          <div  @touchstart="handlecancel" v-show="iscancel">{{iscancel}}</div>
       </div>
   </div>
 </div>

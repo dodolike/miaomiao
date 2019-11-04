@@ -13,9 +13,7 @@ export default new Router({
       cinema,
       mine,
       movie,
-      {
-        path:'/*',
-        redirect:"/cinema/nowplaying"
-      }
+{path:"/*",
+redirect:"/cinema/nowplaying"}
   ]
 })

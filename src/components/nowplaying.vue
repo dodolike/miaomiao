@@ -1,10 +1,11 @@
 <template>
 <div class="movie_body">
   <load v-if="isshow" />
-  <scroll v-else>
+  <scroll v-else :neweasing = 'newseaings' :getnewseaing = "getnewseaing">
  
 <ul>
-    <li v-for="item in movielist" :key="item.id">
+<div class="shownews">{{shownew}}</div>
+    <li v-for="item in movielist" :key="item.id" @tap="detailHandle(item.id)">
         <div class="pic_show">
             <img :src="item.img | setWt('/128.180/')" alt="">
         </div>
@@ -35,7 +36,8 @@ data(){
 return{
 movielist:[],
 ids:-1,
-isshow:true
+isshow:true,
+shownew:''
 }
 },
 mounted(){
@@ -57,7 +59,33 @@ console.log(this.movielist,11111)
 }
 ,
 methods:{
+  detailHandle(aa){
+this.$router.push("/cinema/nowplaying/details"+aa)
+  },
+newseaings(pos){
+  console.log(pos,111)
+if(pos.y>30){
+this.shownew="正在刷新"
+}
+},
+getnewseaing(pos){
+   console.log(pos,222)
+  if(pos.y>30){
+ 
 
+    this.axios.get('/api/movieOnInfoList?cityId='+this.$store.state.city.cityid).then((res)=>{
+      if(res.data.msg==='ok'){
+        this.shownew = "刷新成功"
+  this.isshow = false
+  setTimeout(()=>{this.movielist = res.data.data.movieList
+this.ids =this.$store.state.city.cityid
+console.log(this.movielist,11111)
+this.shownew = ""},1000)
+
+}
+    })
+  }
+}
 }
 
 }
@@ -66,6 +94,7 @@ methods:{
 <style scoped>
 #content .movie_body{ flex:1; overflow:auto;}
 .movie_body ul{ margin:0 12px; overflow: hidden;}
+.shownews{text-align: center}
 .movie_body ul li{ margin-top:12px; display: flex; align-items:center; border-bottom: 1px #e6e6e6 solid; padding-bottom: 10px;}
 .movie_body .pic_show{ width:64px; height: 90px;}
 .movie_body .pic_show img{ width:100%;}

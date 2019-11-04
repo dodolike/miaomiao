@@ -2,7 +2,7 @@
 <div class="city_body">
     <div class=".city_list">
         <load v-if="isshow"/>
-  <scroll v-else>
+  <scroll v-else ref="hs">
     <div>
       <div class="city_hot">
         <h2>热门城市</h2>
@@ -10,8 +10,8 @@
           <li @tap='handlechange(item.nm,item.id)' v-for="item in hotcity" :key="item.id">{{item.nm}}</li>
         </ul>
       </div>
-      <div class="city_sort">
-        <div v-for="itemss in allcitys" :key="itemss.index">
+      <div class="city_sort" ref="hh">
+        <div v-for="itemss in allcitys" :key="itemss.index" >
           <h2>{{itemss.index}}</h2>
           <ul>
             <li @tap='handlechange(itemes.nm,itemes.id)' v-for="itemes in itemss.list" :key="itemes.id">{{itemes.nm}}</li>
@@ -23,7 +23,7 @@
     </div>
     <div class="city_index">
       <ul>
-        <li v-for="items in allcitys " :key="items.index">{{items.index}}</li>
+        <li v-for="(items,indexs) in allcitys " :key="items.index" @touchstart="touchlist(indexs)">{{items.index}}</li>
       </ul>
     </div>
  
@@ -126,7 +126,12 @@ this.isshow = true
       window.localStorage.setItem('citynm',nm)
       window.localStorage.setItem('cityid',id)
        this.$router.push('/movie/nowplaying');
+    },
+    touchlist(indexs){
+      var h2 = this.$refs.hh.getElementsByTagName('h2')
+      this.$refs.hs.toScrollTop (-h2[indexs].offsetTop)
     }
+
 
   }
 };

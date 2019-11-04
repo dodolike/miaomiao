@@ -3,7 +3,7 @@
      <load  v-if="isloading"/>
      <scroll v-else>
      <ul>
-         <li v-for="item in cominglist" :key="item.id">
+         <li @tap = "clickHandle(item.id)" v-for="item in cominglist" :key="item.id">
               <div class="pic_show">
          <img :src="item.img | setWt('/128.180/')" alt="">
      </div>
@@ -29,9 +29,11 @@ export default {
             cominglist:[]
         }
     },
+    props:['default'],
 mounted(){
     this.isloading=true;
-    this.axios.get("/api/movieComingList?cityId=10").then((res)=>{
+    console.log(this.default)
+    this.axios.get("/api/movieComingList?cityId="+this.$store.state.city.cityid).then((res)=>{
 
 if(res.data.msg=='ok'){
     this.isloading = false
@@ -39,6 +41,11 @@ if(res.data.msg=='ok'){
     console.log(this.cominglist)
 }
     })
+},
+methods:{
+    clickHandle(id){
+        this.$router.push("/cinema/comingsoon/details/"+id)
+    }
 }
 }
 </script>

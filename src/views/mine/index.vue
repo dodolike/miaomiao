@@ -2,7 +2,7 @@
   <div id="main">
     <headers tittle="我的喵喵"/>
   <div id="content">
-    
+    <router-view></router-view>
 </div>
 <icon></icon>
 
@@ -16,8 +16,7 @@ import headers from "@/components/header"
 export default {
 components:{
     icon,
-    headers,
-
+    headers
 }
 }
 </script>

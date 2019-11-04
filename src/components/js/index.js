@@ -6,7 +6,7 @@ export var checkboxs = function(data){
         city:'',
         issure:'',
         iscancel:'',
-        handlecancle:null,
+        handlecancel:null,
         handleok:null
         }
         for(var prop in data){
@@ -19,8 +19,8 @@ export var checkboxs = function(data){
                 return{
                     title:defaults.title,
                     city:defaults.city,
-                    issure:defaults.iscancel,
-                    iscancel:defaults.issure
+                    issure:defaults.issure,
+                    iscancel:defaults.iscancel
                 }
             },
             methods:{

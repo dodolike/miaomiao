@@ -4,17 +4,20 @@
     <headers tittle="喵喵电影"/>
 <ul class="movie_menu">
       <router-link tag ="li" to="/cinema/city" class="city_name">{{this.$store.state.city.cityname}}<span class="iconfont icon-lower-triangle"></span></router-link>
+      
       <div class="hot_swtich">
     <router-link tag ="li" to="/cinema/nowplaying" class="hot_item">正在热映</router-link>
     <router-link tag ="li" to="/cinema/comingsoon" class="hot_item">即将上映</router-link>
-
       </div>
+      
     <router-link tag ="li" to="/cinema/search"  class="search_entry">
       <i class="iconfont icon-sousuo "></i>
     </router-link>
 </ul>
 
-<router-view></router-view>
+  <router-view></router-view>
+
+
 <icon></icon>
   </div>
   </div>
@@ -53,8 +56,8 @@ return
       checkboxs({
         title:'当前所处位置',
 city:name,
-issure:'取消',
-iscancel:'确认切换',
+issure:'确认切换',
+iscancel:'取消',
 handlecancle:()=>{console.log('sasas')},
 handleok:()=>{
   window.localStorage.setItem('citynm',name)
@@ -74,7 +77,7 @@ handleok:()=>{
 }
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
 
 #content{ flex:1;overflow:hidden; margin-bottom: 50px; position: relative; display: flex; flex-direction:column;}
 #content .movie_menu{ width: 100%; height: 45px; border-bottom:1px solid #e6e6e6; display: flex; justify-content:space-between; align-items:center; background:white; z-index:10;}
